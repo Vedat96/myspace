@@ -45,13 +45,11 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Auth::routes();
+Route::get('/welcome', 'HomeController@index')->name('welcome');
 
-Route::get('/home', 'HomeController@index')->name('home');
 
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+
 
 Route::resource('users', 'UsersController');
 

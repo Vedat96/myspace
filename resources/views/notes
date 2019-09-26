@@ -166,3 +166,14 @@ Schema::create('likes', function (Blueprint $table) {
             $table->integer('user_id');
             $table->primary('user_id', 'user_liked_id');
             $table->timestamps();
+
+
+------------------
+
+
+TO DO 
+
+
+LIKE BUTTON 		use App\Like;
+
+show.blade          @if(Auth::user()->id)
