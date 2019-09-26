@@ -1,0 +1,168 @@
+<img src="{{ asset('uploads/'.$user->image) }}" class="default" style="width:150px; height: 150px;">
+                            <form enctype="multipart/form-data" action="{{ route('profile.update') }}" method="POST">
+                                @csrf
+                                <br>
+                                <input type="file" name="image"><br>
+                                <button type="submit" class="btn btn-success">Submit</button>
+                            </form>
+
+-------------------------------------
+
+namespace App\Http\Controllers;
+
+ 
+
+use Illuminate\Http\Request;
+use Auth;
+use Image;
+
+ 
+
+class ProfileController extends Controller
+{
+    public function index()
+    {    
+        return view('profile', array('user' => Auth::user()));
+    }
+
+ 
+
+    public function update(Request $request){
+
+ 
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            Image::make($image)->resize(300, 300)->save( public_path('\uploads\\' . $filename) );
+
+ 
+
+            $user = Auth::user();
+            $user->image = $filename;
+            $user->save();
+        }
+        return view('profile', array('user' => Auth::user()));
+    }
+}
+ 
+//controller//
+
+-------------------------
+Route::post('/profile', 'ProfileController@update')->name('profile.update');
+
+-----------------------
+$table->string('image')->default('image.jpg');
+
+----------------------------
+
+
+
+
+## Controller
+
+ 
+
+<?php
+
+ 
+
+namespace App\Http\Controllers;
+
+ 
+
+use Illuminate\Http\Request;
+
+use App\Like;
+
+ 
+
+class LikeController extends Controller
+
+{
+
+    public function like(Request $request)
+
+    {
+
+        if(Like::where('user_id', Auth::id())->where('user_liked_id', $request->id)->count()) {
+
+            Like::where('user_id', Auth::id())->where('user_liked_id', $request->id)->delete();
+
+        }
+
+        else {
+
+            $like = new Like;
+
+            $like->user_id = Auth::id();
+
+            $like->user_liked_id = $request->id;
+
+            $like->save();
+
+        }
+
+        return response()->json([
+
+            'message' => 'Whoopdidooo'
+
+        ]);
+
+    }
+
+}
+
+ 
+
+ 
+
+## Javascript
+
+ 
+
+$('#like-button').click(function(event) {
+
+    event.preventDefault();
+
+    axios.get($(this).prop('href'))
+
+        .finally(function () {
+
+            // like button updaten
+
+        });
+
+    return false;
+
+});
+
+ 
+
+ 
+
+## Html
+
+ 
+
+<a class="btn btn-primary" href="{{ route('like', ['id' => Auth::id()]) }}">Like me</a>
+
+ 
+
+ 
+
+## Route
+
+ -------------------------------
+
+Route::get('/like/{id}', 'LikeController@like')->name('like');    
+
+--------------------------------
+create_likes_table
+
+
+Schema::create('likes', function (Blueprint $table) {
+            $table->integer('user_liked_id');
+            $table->integer('user_id');
+            $table->primary('user_id', 'user_liked_id');
+            $table->timestamps();

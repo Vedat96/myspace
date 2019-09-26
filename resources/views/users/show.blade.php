@@ -8,6 +8,21 @@
     <div class="col-md-9 col-lg-9 col-sm-9 pull-left">
       <!-- Jumbotron -->
         <div class="jumbotron">
+
+            <img src="{{ asset('uploads/'.$user->image) }}" class="default" style="width:150px; height: 150px;">\
+                @if(Auth::check())        
+                    <form enctype="multipart/form-data" action="{{ route('users.update') }}" method="POST">
+                        @csrf
+                        <br>
+                        <input type="file" name="image"><br>
+                        <br>
+                        <button type="submit" class="btn btn-success">Submit</button>
+                    </form>
+                @endif
+
+
+
+
             <h1>{{ $user->name }}</h1>
             @if(Auth::check())
 

@@ -1,8 +1,10 @@
 <?php
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Like;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class LikeController extends Controller
 

@@ -57,6 +57,13 @@ Route::resource('users', 'UsersController');
 
 
 
+Route::post('/users.welcome', 'ProfileController@update')->name('users.update');
+// Route::post('/profile', 'ProfileController@update')->name('profile.update');
+
+
+
+
+
 
 // Route::group(['middleware' => 'auth'], function() {
 	

@@ -11,7 +11,7 @@
             <form method="post" action="{{ route('users.update',[$user->id]) }}">
                 {{ csrf_field() }}
 
-                <input type="hidden" name="_method" value="put">
+                <input type="hidden" name="_method" value="POST">
 
                 <div class="form-group">
                     <label for="user-name">Name<span class="required">*</span></label>
