@@ -31,6 +31,7 @@ Route::any ( '/search', function () {
 } );
 
 Route::get('/search','UsersController@search');
+Route::get('/like/{id}', 'LikeController@like')->name('like');
 
 
 

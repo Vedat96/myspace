@@ -30,3 +30,45 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 const app = new Vue({
     el: '#app',
 });
+
+
+
+$('#like-button').click(function(event) {
+
+    event.preventDefault();
+
+    axios.get($(this).prop('href'))
+
+        .finally(function () {
+
+            // like button updaten
+
+        });
+
+    return false;
+
+});
+
+
+// axios.get('/user?ID=12345')
+
+//   .finally(function () {
+//     // always executed
+//   });
+//   return false;
+// })
+
+
+// <a class= "btn btn-primary" href
+
+
+// Route::get('/like()id', LikeController@Like->name('like'));
+
+// //make controller LikeController
+// Use App\Like
+// public function like(Request, $request)
+// {
+// 	if(Like::where('user_id', Aith::id()->where('liked_id', $request->id)->count))
+// 	{Like::where('user_id', Aith::id()->where('liked_id', $request->id)->count)	
+// 	}
+// }

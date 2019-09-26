@@ -9,7 +9,10 @@
       <!-- Jumbotron -->
         <div class="jumbotron">
             <h1>{{ $user->name }}</h1>
-            <p class="lead">{{ $user->email}}.</p>
+            @if(Auth::check())
+
+                <p class="lead">{{ $user->email}}.</p>
+            @endif
             {{-- <p class="lead">{{ $user->password}}.</p> --}}
         </div> 
 
@@ -48,6 +51,13 @@
                 </li>
             </ol>
         </div>
+
+        <a class="btn btn-primary" href="{{ route('like', ['id' => Auth::id()]) }}">Like me</a>
+
+
+
+
+
 
     @endif
 
